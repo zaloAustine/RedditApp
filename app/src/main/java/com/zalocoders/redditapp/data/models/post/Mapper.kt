@@ -18,16 +18,27 @@ fun Children.toFavouritePostEntity():FavouritePostEntity{
 	post_hint = this.child_data.post_hint,
 	thumbnail = this.child_data.thumbnail,
 	url = this.child_data.url,
-	media_url = getMediaUrl(this.child_data.media,this.child_data.is_video),
+	media_url = getMediaUrl(this.child_data.media,this.child_data.is_video,this),
 	media_type = getMediaType(this.child_data.media,this.child_data.is_video),
-	favourite_id = this.child_data.id)
+	favourite_id = this.child_data.id,
+	description = this.child_data.description)
 	}
 
 
 fun getMediaType(media: Media?, isVideo: Boolean): MediaType {
-	return MediaType.GIF
-}
+	if(isVideo){
+			return MediaType.VIDEO
+		}else if(!isVideo && media?.oembed != null){
+			return MediaType.GIF
+		}
+	return MediaType.IMAGE
+	}
 
-fun getMediaUrl(media: Media?, isVideo: Boolean): String {
-	return ""
+fun getMediaUrl(media: Media?, isVideo: Boolean,children: Children): String {
+	if(isVideo){
+		return media?.reddit_video!!.hls_url
+	}else if(!isVideo && media?.oembed != null){
+		return media.oembed.thumbnail_url
+	}
+	return children.child_data.url
 }

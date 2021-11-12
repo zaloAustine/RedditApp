@@ -1,5 +1,7 @@
 package com.zalocoders.redditapp.data.models.post
 
+import com.squareup.moshi.Json
+
 data class ChildrenData(
 		val archived: Boolean,
 		val author: String,
@@ -24,5 +26,7 @@ data class ChildrenData(
 		val thumbnail_width: Int,
 		val ups: Int,
 		val upvote_ratio: Double,
+		@Json(name = "url_overridden_by_dest")
 		val url: String,
-)
+		val description:String,
+		)

@@ -23,4 +23,5 @@ data class FavouritePostEntity(
 		val post_hint:String,
 		val thumbnail: String,
 		val url: String,
-)
+		val description:String
+		)

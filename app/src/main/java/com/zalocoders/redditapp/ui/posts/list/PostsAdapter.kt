@@ -1,6 +1,6 @@
 package com.zalocoders.redditapp.ui.posts.list
 
-import android.annotation.SuppressLint
+import gandroid.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -17,6 +17,7 @@ class PostsAdapter : PagingDataAdapter<Children, PostsAdapter.PostsViewHolder>(d
 		fun bind(item: Children) {
 			with(binding) {
 			postTitle.text = item.child_data.title
+				postDescription.text = item.child_data.description
 			}
 		}
 	}
