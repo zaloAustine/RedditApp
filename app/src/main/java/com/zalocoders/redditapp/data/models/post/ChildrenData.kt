@@ -1,7 +1,9 @@
 package com.zalocoders.redditapp.data.models.post
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class ChildrenData(
 		val archived: Boolean,
 		val author: String,
@@ -28,5 +30,4 @@ data class ChildrenData(
 		val upvote_ratio: Double,
 		@Json(name = "url_overridden_by_dest")
 		val url: String,
-		val description:String,
 		)

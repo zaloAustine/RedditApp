@@ -40,6 +40,7 @@ android {
 
 dependencies {
     def nav_version = "2.3.5"
+    def exoPlayerVersion = "2.16.0"
     def paging_version = "3.0.0-alpha03"
 
 
@@ -79,7 +80,6 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
-
     //RxJava 2
     implementation "io.reactivex.rxjava2:rxjava:2.2.18"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
@@ -88,4 +88,15 @@ dependencies {
 
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
     implementation "androidx.paging:paging-rxjava2-ktx:$paging_version"
+
+    //video player
+    implementation "com.google.android.exoplayer:exoplayer:$exoPlayerVersion"
+
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    //favourite
+    implementation 'com.github.ivbaranov:materialfavoritebutton:0.1.5'
 }

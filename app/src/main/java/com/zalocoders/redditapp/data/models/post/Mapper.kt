@@ -20,8 +20,8 @@ fun Children.toFavouritePostEntity():FavouritePostEntity{
 	url = this.child_data.url,
 	media_url = getMediaUrl(this.child_data.media,this.child_data.is_video,this),
 	media_type = getMediaType(this.child_data.media,this.child_data.is_video),
-	favourite_id = this.child_data.id,
-	description = this.child_data.description)
+	favourite_id = this.child_data.id
+	)
 	}
 
 
@@ -36,7 +36,7 @@ fun getMediaType(media: Media?, isVideo: Boolean): MediaType {
 
 fun getMediaUrl(media: Media?, isVideo: Boolean,children: Children): String {
 	if(isVideo){
-		return media?.reddit_video!!.hls_url
+		return media?.reddit_video!!.fallback_url
 	}else if(!isVideo && media?.oembed != null){
 		return media.oembed.thumbnail_url
 	}

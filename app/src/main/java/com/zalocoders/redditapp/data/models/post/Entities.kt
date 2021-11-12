@@ -22,6 +22,5 @@ data class FavouritePostEntity(
 		val score: Int,
 		val post_hint:String,
 		val thumbnail: String,
-		val url: String,
-		val description:String
+		val url: String
 		)

@@ -34,11 +34,6 @@ class PostsListFragment : Fragment() {
 		setUpRecyclerView()
 		getPost()
 		setUpLoading()
-		
-		lifecycleScope.launchWhenCreated {
-			viewModel.ins()
-		}
-		
 	}
 	
 	private fun setUpRecyclerView() {

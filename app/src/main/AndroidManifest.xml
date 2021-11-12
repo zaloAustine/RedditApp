@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".Reddit"
+        android:hardwareAccelerated="true"
         android:theme="@style/Theme.RedditApp" >
         <activity
             android:name=".ui.posts.PostsActivity"
