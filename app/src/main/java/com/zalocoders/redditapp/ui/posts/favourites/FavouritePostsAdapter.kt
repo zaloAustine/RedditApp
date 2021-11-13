@@ -7,16 +7,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zalocoders.redditapp.data.models.post.MediaType
-import com.zalocoders.redditapp.databinding.PostItemLayoutBinding
 import com.zalocoders.redditapp.utils.show
 import com.bumptech.glide.request.RequestOptions
 import android.webkit.WebChromeClient
 import androidx.recyclerview.widget.ListAdapter
 import com.zalocoders.redditapp.data.models.post.FavouritePostEntity
+import com.zalocoders.redditapp.databinding.FavouritePostItemLayoutBinding
 
 
 class FavouritePostsAdapter(private val onClickListener: FavouritesOnClickListener) : ListAdapter<FavouritePostEntity, FavouritePostsAdapter.PostsViewHolder>(favouritePostsDiffUtil){
-	inner class  PostsViewHolder(private val binding: PostItemLayoutBinding) :
+	inner class  PostsViewHolder(private val binding: FavouritePostItemLayoutBinding) :
 			RecyclerView.ViewHolder(binding.root) {
 		
 		@SuppressLint("SetTextI18n")
@@ -40,16 +40,9 @@ class FavouritePostsAdapter(private val onClickListener: FavouritesOnClickListen
 					
 				}
 				
-				addToFavourite.setOnFavoriteChangeListener { _, favorite ->
-					if (favorite) {
-						onClickListener.addFavourite(item)
-						addToFavourite.isFavorite = true
-						
-					} else {
-						onClickListener.deleteFavourite(item)
-						addToFavourite.isFavorite = false
-						
-					}
+				removeFavourite.setOnClickListener {
+					onClickListener.deleteFavourite(item)
+					
 				}
 				
 				when (item.media_type) {
@@ -78,7 +71,7 @@ class FavouritePostsAdapter(private val onClickListener: FavouritesOnClickListen
 	
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsViewHolder =
 			PostsViewHolder(
-					PostItemLayoutBinding.inflate(
+					FavouritePostItemLayoutBinding.inflate(
 							LayoutInflater.from(parent.context), parent, false
 					)
 			)

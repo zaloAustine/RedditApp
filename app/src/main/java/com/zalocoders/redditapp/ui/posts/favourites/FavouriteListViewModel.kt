@@ -53,9 +53,9 @@ class FavouriteListViewModel @Inject constructor(
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe({
-					_isCleared.value = true
+					_isDeleted.value = true
 				},{
-					_isCleared.value = false
+					_isDeleted.value = false
 				}))
 	}
 	
