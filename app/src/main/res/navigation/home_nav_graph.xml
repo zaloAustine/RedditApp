@@ -9,7 +9,7 @@
         android:id="@+id/postsListFragment"
         tools:layout="@layout/fragment_posts_list"
         android:name="com.zalocoders.redditapp.ui.posts.list.PostsListFragment"
-        android:label="PostsListFragment" >
+        android:label="Top Posts" >
 
         <action
             android:id="@+id/action_postsListFragment_to_postDetailsFragment"
@@ -22,7 +22,7 @@
         android:id="@+id/postDetailsFragment"
         tools:layout="@layout/fragment_post_details"
         android:name="com.zalocoders.redditapp.ui.posts.detail.PostDetailsFragment"
-        android:label="PostDetailsFragment" >
+        android:label="Post Details" >
 
         <argument
             android:name="post"
@@ -31,6 +31,6 @@
     <fragment
         android:id="@+id/favouriteListFragment"
         android:name="com.zalocoders.redditapp.ui.posts.favourites.FavouriteListFragment"
-        android:label="fragment_favourite_list"
+        android:label="Favourite Posts"
         tools:layout="@layout/fragment_favourite_list" />
 </navigation>
