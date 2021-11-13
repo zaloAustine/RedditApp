@@ -18,12 +18,21 @@ fun View.showSnackbar(message: String, length: Int) {
 	val snackbar = Snackbar.make(this, message, length)
 	
 	snackbar.apply {
-		setTextColor(ContextCompat.getColor(this.context, android.R.color.black))
-		this.setBackgroundTint(ContextCompat.getColor(context, R.color.white))
+		setTextColor(ContextCompat.getColor(this.context, android.R.color.white))
+		this.setBackgroundTint(ContextCompat.getColor(context, R.color.black))
 		show()
 	}
 }
 
+fun View.showErrorSnackbar(message: String, length: Int) {
+	val snackbar = Snackbar.make(this, message, length)
+	
+	snackbar.apply {
+		setTextColor(ContextCompat.getColor(this.context, android.R.color.white))
+		this.setBackgroundTint(ContextCompat.getColor(this.context, android.R.color.holo_red_light))
+		show()
+	}
+}
 fun View.showRetrySnackBar(message: String, action: ((View) -> Unit)?) {
 	val snackbar = Snackbar.make(this, message, Snackbar.LENGTH_LONG)
 	

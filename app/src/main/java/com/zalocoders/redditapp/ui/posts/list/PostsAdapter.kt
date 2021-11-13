@@ -1,10 +1,8 @@
 package com.zalocoders.redditapp.ui.posts.list
 
 import android.annotation.SuppressLint
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.MediaController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -19,10 +17,7 @@ import com.bumptech.glide.request.RequestOptions
 import android.webkit.WebChromeClient
 
 
-
-
-
-class PostsAdapter : PagingDataAdapter<Children, PostsAdapter.PostsViewHolder>(diffUtil){
+class PostsAdapter(private val onClickListener: OnClickListener,private val favouriteIds:List<String>) : PagingDataAdapter<Children, PostsAdapter.PostsViewHolder>(diffUtil){
 	inner class  PostsViewHolder(private val binding: PostItemLayoutBinding) :
 			RecyclerView.ViewHolder(binding.root) {
 		
@@ -35,8 +30,33 @@ class PostsAdapter : PagingDataAdapter<Children, PostsAdapter.PostsViewHolder>(d
 				upvote.text = "${data.ups} ups"
 				downVotes.text = "${data.downs} downs"
 				
-				likes.text = "${data.likes.toString()} likes"
+				if (data.likes.isNullOrEmpty()){
+					likes.text = "0 likes"
+				}else{
+					likes.text = "${data.likes} likes"
+				}
 				comments.text = data.num_comments.toString()
+				
+				if(favouriteIds.contains(data.id)){
+					addToFavourite.isFavorite = true
+				}
+				
+				postCard.setOnClickListener {
+					onClickListener.favouriteDetails(item)
+					
+				}
+				
+				addToFavourite.setOnFavoriteChangeListener { _, favorite ->
+					if (favorite) {
+						onClickListener.addFavourite(item)
+						addToFavourite.isFavorite = true
+						
+					} else {
+						onClickListener.deleteFavourite(item)
+						addToFavourite.isFavorite = false
+						
+					}
+				}
 				
 				when(getMediaType(item.child_data.media,item.child_data.is_video)){
 					MediaType.IMAGE,MediaType.GIF  -> {
@@ -84,4 +104,10 @@ val diffUtil = object : DiffUtil.ItemCallback<Children>() {
 		return oldItem == newItem
 	}
 }
+
+interface OnClickListener {
+	fun addFavourite(item:Children)
+	fun deleteFavourite(item:Children)
+	fun favouriteDetails(item:Children)
 	
+}

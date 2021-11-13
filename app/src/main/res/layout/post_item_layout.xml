@@ -7,6 +7,7 @@
     android:layout_margin="8dp"
     app:cardElevation="4dp"
     android:elevation="4dp"
+    android:id="@+id/postCard"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,10 +18,12 @@
             android:id="@+id/add_to_favourite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tint="@color/orange"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/comments"
             app:layout_constraintTop_toBottomOf="@+id/comments"
+            app:layout_constraintVertical_bias="0.0"
             app:mfb_color="black"
             app:mfb_padding="12"
             app:mfb_size="60" />

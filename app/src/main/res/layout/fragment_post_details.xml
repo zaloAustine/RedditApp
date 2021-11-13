@@ -1,14 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.posts.PostDetailsFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+
+        <WebView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/todo"
+            android:visibility="gone" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content">
+
+
+            <com.github.ivbaranov.mfb.MaterialFavoriteButton
+                android:id="@+id/add_to_favourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/orange"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/comments"
+                app:layout_constraintTop_toBottomOf="@+id/comments"
+                app:layout_constraintVertical_bias="0.0"
+                app:mfb_color="black"
+                app:mfb_padding="12"
+                app:mfb_size="60" />
+
+            <TextView
+                android:id="@+id/postTitle"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginBottom="43dp"
+                app:layout_constraintBottom_toTopOf="@+id/likes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="test text" />
+
+            <TextView
+                android:id="@+id/upvote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:drawableTint="@color/white"
+                android:drawableRight="@drawable/ic_up_arrow"
+                android:textColor="@color/green"
+                app:layout_constraintStart_toStartOf="@+id/postTitle"
+                app:layout_constraintTop_toBottomOf="@+id/postTitle"
+                tools:text="up votes" />
+
+            <TextView
+                android:id="@+id/downVotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/red"
+                app:drawableTint="@color/white"
+                app:drawableRightCompat="@drawable/ic_down_arrow"
+                app:layout_constraintBottom_toBottomOf="@+id/upvote"
+                app:layout_constraintStart_toEndOf="@+id/upvote"
+                app:layout_constraintTop_toTopOf="@+id/upvote"
+                tools:text="down votes" />
+
+            <TextView
+                android:id="@+id/likes"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_margin="12dp"
+                android:text="@string/likes"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/upvote"
+                app:layout_constraintTop_toBottomOf="@+id/postTitle"
+                tools:text="likes" />
+
+            <TextView
+                android:id="@+id/comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_comment"
+                android:drawablePadding="12dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/downVotes"
+                app:layout_constraintEnd_toEndOf="@+id/postTitle"
+                app:layout_constraintTop_toTopOf="@+id/downVotes"
+                tools:text="comments"
+                app:drawableTint="@color/white" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+

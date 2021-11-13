@@ -22,5 +22,5 @@ interface FavouritePostsDao {
 	 fun deleteAllPosts():Single<Int>
 	
 	@Query("DELETE FROM favourite_posts WHERE favourite_id = :id")
-	fun deletePost(id:Int):Single<Int>
+	fun deletePost(id:String):Single<Int>
 }

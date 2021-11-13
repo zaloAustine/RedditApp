@@ -1,7 +1,9 @@
 package com.zalocoders.redditapp.data.models.post
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "favourite_posts")
 data class FavouritePostEntity(

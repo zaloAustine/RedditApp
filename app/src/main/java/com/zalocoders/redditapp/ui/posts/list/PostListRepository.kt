@@ -24,9 +24,20 @@ class PostListRepository @Inject constructor(
 			PostPagingSource(apiService)
 		}.flow
 	 }
-	
-}
 
+	@SuppressLint("CheckResult")
+	fun saveFavouriteToDb(post:FavouritePostEntity): Completable {
+		return favouritePostsDao.insertFavourite(post)
+	}
+	
+	fun deleteFavourite(id:String): Single<Int> {
+		return favouritePostsDao.deletePost(id)
+	}
+	
+	fun getAllFavourites():Single<List<FavouritePostEntity>>{
+		return favouritePostsDao.getAllFavouritePost()
+	}
+}
 
 
 class PostPagingSource(

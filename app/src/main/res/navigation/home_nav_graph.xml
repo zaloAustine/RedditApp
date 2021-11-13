@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav_graph"
     app:startDestination="@id/postsListFragment">
 
     <fragment
         android:id="@+id/postsListFragment"
+        tools:layout="@layout/fragment_posts_list"
         android:name="com.zalocoders.redditapp.ui.posts.list.PostsListFragment"
         android:label="PostsListFragment" >
+
         <action
             android:id="@+id/action_postsListFragment_to_postDetailsFragment"
             app:destination="@id/postDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/postDetailsFragment"
+        tools:layout="@layout/fragment_post_details"
         android:name="com.zalocoders.redditapp.ui.posts.detail.PostDetailsFragment"
-        android:label="PostDetailsFragment" />
+        android:label="PostDetailsFragment" >
+
+        <argument
+            android:name="post"
+            app:argType="com.zalocoders.redditapp.data.models.post.Children" />
+    </fragment>
 </navigation>

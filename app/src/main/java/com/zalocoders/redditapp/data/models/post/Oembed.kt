@@ -1,5 +1,9 @@
 package com.zalocoders.redditapp.data.models.post
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Oembed(
     val author_name: String,
     val description: String,
@@ -14,4 +18,4 @@ data class Oembed(
     val type: String,
     val version: String,
     val width: Int
-)
+):Parcelable

@@ -1,5 +1,9 @@
 package com.zalocoders.redditapp.data.models.post
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class RedditVideo(
     val dash_url: String,
     val duration: Int,
@@ -10,4 +14,4 @@ data class RedditVideo(
     val scrubber_media_url: String,
     val transcoding_status: String,
     val width: Int
-)
+):Parcelable

@@ -8,15 +8,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import com.zalocoders.redditapp.data.models.post.Children
+import com.zalocoders.redditapp.data.models.post.toFavouritePostEntity
 import com.zalocoders.redditapp.databinding.FragmentPostsListBinding
+import com.zalocoders.redditapp.utils.showErrorSnackbar
+import com.zalocoders.redditapp.utils.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import timber.log.Timber
 
 @AndroidEntryPoint
-class PostsListFragment : Fragment() {
+class PostsListFragment : Fragment(),OnClickListener{
 	private lateinit var binding:FragmentPostsListBinding
 	private lateinit var postAdapter:PostsAdapter
 	
@@ -31,18 +37,40 @@ class PostsListFragment : Fragment() {
 	
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+		observeViewModel()
+		viewModel.getFavourite()
 		setUpRecyclerView()
-		getPost()
-		setUpLoading()
+	}
+	
+	private fun observeViewModel(){
+		viewModel.isSaved.observe(viewLifecycleOwner,{
+			when(it){
+				true -> view?.showSnackbar("Added to Favourites",Snackbar.LENGTH_SHORT)
+				false -> view?.showErrorSnackbar("Failed Adding",Snackbar.LENGTH_SHORT)
+			}
+		})
+		
+		viewModel.isDeleted.observe(viewLifecycleOwner,{
+			when(it){
+				true -> view?.showErrorSnackbar("Removed from Favourites",Snackbar.LENGTH_SHORT)
+				false -> view?.showErrorSnackbar("Failed removing",Snackbar.LENGTH_SHORT)
+			}
+		})
 	}
 	
 	private fun setUpRecyclerView() {
-		 postAdapter = PostsAdapter()
+		viewModel.favouritesLiveData.observe(viewLifecycleOwner,{
+			postAdapter = PostsAdapter(this,it.map { favourite -> favourite.favourite_id })
 			binding.postRecyclerview.apply {
 				layoutManager = LinearLayoutManager(context)
 				setHasFixedSize(true)
 				adapter = postAdapter
 			}
+			getPost()
+			setUpLoading()
+			
+		})
+		
 	}
 	
 	private fun getPost(){
@@ -73,5 +101,18 @@ class PostsListFragment : Fragment() {
 				}
 			}
 		}
+	}
+	
+	override fun addFavourite(item: Children) {
+		viewModel.saveFavouriteToDb(item.toFavouritePostEntity())
+	}
+	
+	override fun deleteFavourite(item: Children) {
+		viewModel.deleteFavourite(item.child_data.id)
+	}
+	
+	override fun favouriteDetails(item: Children) {
+		val action = PostsListFragmentDirections.actionPostsListFragmentToPostDetailsFragment(item)
+		findNavController().navigate(action)
 	}
 }

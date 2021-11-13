@@ -32,14 +32,8 @@ class FavouriteListViewModel @Inject constructor(
 						{ error -> Timber.e(error.localizedMessage) }))
 	}
 	
-	fun saveFavouriteToDb(favouritePostEntity: FavouritePostEntity){
-		disposable.add(repository.saveFavouriteToDb(favouritePostEntity)
-				.subscribeOn(Schedulers.io())
-				.observeOn(AndroidSchedulers.mainThread())
-				.subscribe())
-	}
-
-	fun deleteFavourite(id:Int){
+	
+	fun deleteFavourite(id:String){
 		disposable.add(repository.deleteFavourite(id)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
