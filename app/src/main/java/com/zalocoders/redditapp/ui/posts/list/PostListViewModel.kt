@@ -11,7 +11,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import timber.log.Timber
 
 
 @HiltViewModel
@@ -28,9 +27,6 @@ class PostListViewModel @Inject constructor(
 	val isDeleted: LiveData<Boolean>
 		get() = _isDeleted
 	
-	private val _favouritesLiveData = MutableLiveData<List<FavouritePostEntity>>()
-	val favouritesLiveData: LiveData<List<FavouritePostEntity>>
-		get() = _favouritesLiveData
 	
 	fun getTopPosts() = repository.getTopPosts().cachedIn(viewModelScope)
 	
@@ -56,14 +52,9 @@ class PostListViewModel @Inject constructor(
 				}))
 	}
 	
-	fun getFavourite(){
-		disposable.add(repository.getAllFavourites()
-				.subscribeOn(Schedulers.io())
-				.observeOn(AndroidSchedulers.mainThread())
-				.subscribe({ _favouritesLiveData.postValue(it) },
-						{ error -> Timber.e(error.localizedMessage) }))
+	fun getFavourite():LiveData<List<FavouritePostEntity>>{
+		return repository.getAllFavourites()
 	}
-	
 	
 	override fun onCleared() {
 		super.onCleared()

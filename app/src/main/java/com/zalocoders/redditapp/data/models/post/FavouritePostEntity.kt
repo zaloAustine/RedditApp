@@ -1,5 +1,6 @@
 package com.zalocoders.redditapp.data.models.post
 
+import android.icu.text.CaseMap
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -24,5 +25,7 @@ data class FavouritePostEntity(
 		val score: Int,
 		val post_hint:String,
 		val thumbnail: String,
-		val url: String
+		val url: String,
+		val ups:String,
+		val title: String
 		)

@@ -1,5 +1,6 @@
 package com.zalocoders.redditapp.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -16,7 +17,7 @@ interface FavouritePostsDao {
 	 fun insertFavourite(post: FavouritePostEntity):Completable
 	
 	@Query("SELECT * FROM favourite_posts")
-	fun getAllFavouritePost(): Single<List<FavouritePostEntity>>
+	fun getAllFavouritePost(): LiveData<List<FavouritePostEntity>>
 	
 	@Query("DELETE FROM favourite_posts")
 	 fun deleteAllPosts():Single<Int>

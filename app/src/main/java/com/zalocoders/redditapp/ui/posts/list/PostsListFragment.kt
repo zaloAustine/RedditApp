@@ -25,6 +25,7 @@ import timber.log.Timber
 class PostsListFragment : Fragment(),OnClickListener{
 	private lateinit var binding:FragmentPostsListBinding
 	private lateinit var postAdapter:PostsAdapter
+	private var ids = mutableListOf<String>()
 	
 	private val viewModel:PostListViewModel by viewModels()
 	
@@ -38,10 +39,18 @@ class PostsListFragment : Fragment(),OnClickListener{
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		observeViewModel()
-		viewModel.getFavourite()
 		setUpRecyclerView()
+		setUpViews()
+		getPost()
+		setUpLoading()
 	}
 	
+	private fun setUpViews(){
+		binding.favourites.setOnClickListener {
+			val action = PostsListFragmentDirections.actionPostsListFragmentToFavouriteListFragment()
+			findNavController().navigate(action)
+		}
+	}
 	private fun observeViewModel(){
 		viewModel.isSaved.observe(viewLifecycleOwner,{
 			when(it){
@@ -59,16 +68,16 @@ class PostsListFragment : Fragment(),OnClickListener{
 	}
 	
 	private fun setUpRecyclerView() {
-		viewModel.favouritesLiveData.observe(viewLifecycleOwner,{
-			postAdapter = PostsAdapter(this,it.map { favourite -> favourite.favourite_id })
-			binding.postRecyclerview.apply {
-				layoutManager = LinearLayoutManager(context)
-				setHasFixedSize(true)
-				adapter = postAdapter
-			}
-			getPost()
-			setUpLoading()
-			
+		postAdapter = PostsAdapter(this,ids)
+		binding.postRecyclerview.apply {
+			layoutManager = LinearLayoutManager(context)
+			setHasFixedSize(true)
+			adapter = postAdapter
+		}
+		
+		viewModel.getFavourite().observe(viewLifecycleOwner,{ item ->
+			ids.clear()
+			ids.addAll(item.map { it.favourite_id })
 		})
 		
 	}

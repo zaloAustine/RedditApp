@@ -2,6 +2,7 @@ package com.zalocoders.redditapp.ui.posts.detail
 
 
 import android.annotation.SuppressLint
+import androidx.lifecycle.LiveData
 import com.zalocoders.redditapp.data.models.post.FavouritePostEntity
 import com.zalocoders.redditapp.db.FavouritePostsDao
 import io.reactivex.Completable
@@ -13,8 +14,8 @@ class PostDetailRepository @Inject constructor(
 		private val favouritePostsDao: FavouritePostsDao
 ) {
 	
-	fun getAllFavourites():Single<List<FavouritePostEntity>>{
-	return favouritePostsDao.getAllFavouritePost()
+	fun getAllFavourites():LiveData<List<FavouritePostEntity>>{
+		return favouritePostsDao.getAllFavouritePost()
 	}
 	
 	fun deleteFavourite(id:String):Single<Int>{

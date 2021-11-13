@@ -6,5 +6,7 @@
     <string name="likes">Likes</string>
     <string name="todo">TODO</string>
     <string name="posts">Posts</string>
-    <string name="favourite_posts">See Favourite Posts</string>
+    <string name="favourite_posts">Favourite Posts</string>
+    <string name="favourite_posts_will_appear_hear">Favourite posts will appear hear</string>
+    <string name="clear_favourites">Clear favourites</string>
 </resources>

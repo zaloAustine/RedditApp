@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_postsListFragment_to_postDetailsFragment"
             app:destination="@id/postDetailsFragment" />
+        <action
+            android:id="@+id/action_postsListFragment_to_favouriteListFragment"
+            app:destination="@id/favouriteListFragment" />
     </fragment>
     <fragment
         android:id="@+id/postDetailsFragment"
@@ -25,4 +28,9 @@
             android:name="post"
             app:argType="com.zalocoders.redditapp.data.models.post.Children" />
     </fragment>
+    <fragment
+        android:id="@+id/favouriteListFragment"
+        android:name="com.zalocoders.redditapp.ui.posts.favourites.FavouriteListFragment"
+        android:label="fragment_favourite_list"
+        tools:layout="@layout/fragment_favourite_list" />
 </navigation>

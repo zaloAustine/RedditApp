@@ -1,6 +1,7 @@
 package com.zalocoders.redditapp.ui.posts.list
 
 import android.annotation.SuppressLint
+import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -34,7 +35,7 @@ class PostListRepository @Inject constructor(
 		return favouritePostsDao.deletePost(id)
 	}
 	
-	fun getAllFavourites():Single<List<FavouritePostEntity>>{
+	fun getAllFavourites(): LiveData<List<FavouritePostEntity>> {
 		return favouritePostsDao.getAllFavouritePost()
 	}
 }

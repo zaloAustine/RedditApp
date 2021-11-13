@@ -19,12 +19,6 @@ class FavouriteListViewModel @Inject constructor(
 	
 	private val disposable = CompositeDisposable()
 	
-	private val _favouritesLiveData = MutableLiveData<List<FavouritePostEntity>>()
-	
-	val favouritesLiveData: LiveData<List<FavouritePostEntity>>
-	get() = _favouritesLiveData
-	
-	
 	private val _isSaved = MutableLiveData<Boolean>()
 	val isSaved: LiveData<Boolean>
 		get() = _isSaved
@@ -33,12 +27,24 @@ class FavouriteListViewModel @Inject constructor(
 	val isDeleted: LiveData<Boolean>
 		get() = _isDeleted
 	
-	fun getFavourite(){
-		disposable.add(repository.getAllFavourites()
+	private val _isCleared = MutableLiveData<Boolean>()
+	val isCleared: LiveData<Boolean>
+		get() = _isCleared
+	
+	fun getFavourite():LiveData<List<FavouritePostEntity>>{
+		return repository.getAllFavourites()
+	}
+	
+	
+	fun deleteAllFavourites(){
+		disposable.add(repository.deleteAllFavourite()
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
-				.subscribe({ _favouritesLiveData.postValue(it) },
-						{ error -> Timber.e(error.localizedMessage) }))
+				.subscribe({
+					_isCleared.value = true
+				},{
+					_isCleared.value = false
+				}))
 	}
 	
 	
@@ -46,15 +52,22 @@ class FavouriteListViewModel @Inject constructor(
 		disposable.add(repository.deleteFavourite(id)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
-				.subscribe())
+				.subscribe({
+					_isCleared.value = true
+				},{
+					_isCleared.value = false
+				}))
 	}
 	
-	fun deleteAllFavourites(){
-		disposable.add(repository.deleteAllFavourite()
+	fun saveFavouriteToDb(favouritePostEntity: FavouritePostEntity){
+		disposable.add(repository.saveFavouriteToDb(favouritePostEntity)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
-				.subscribe())
-		
+				.subscribe({
+					_isCleared.value = true
+				},{
+					_isSaved.value = false
+				}))
 	}
 	
 	override fun onCleared() {

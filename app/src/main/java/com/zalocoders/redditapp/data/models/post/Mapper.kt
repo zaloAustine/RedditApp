@@ -20,7 +20,10 @@ fun Children.toFavouritePostEntity():FavouritePostEntity{
 	url = this.child_data.url,
 	media_url = getMediaUrl(this.child_data.media,this.child_data.is_video,this),
 	media_type = getMediaType(this.child_data.media,this.child_data.is_video),
-	favourite_id = this.child_data.id
+	favourite_id = this.child_data.id,
+	ups = this.child_data.ups.toString(),
+	title = this.child_data.title
+	
 	)
 	}
 
