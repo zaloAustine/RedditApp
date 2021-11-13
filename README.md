@@ -5,7 +5,35 @@
  - Build the project
 
 * gets top post from reddit and displays different media(GIF.VIDEO,IMAGE).
-* Enable user to add a post to favourites and retrive
+* Enable user to add/remove a post to favourites and retrieve
+
+<table>
+<tr>
+<td>
+<img  width="200" height="400" src="./screenshort/5.png"/>
+</td>
+<td>
+<img  width="200" height="400" src="./screenshort/1.png"/>
+</td>
+<td>
+<img  width="200" height="400" src="./screenshort/3.png"/>
+</td>
+</tr>
+
+<tr>
+<td>
+<img  width="200" height="400" src="./screenshort/3.png"/>
+</td>
+<td>
+<img  width="200" height="400" src="./screenshort/4.png"/>
+</td>
+<td>
+<img  width="200" height="400" src="./screenshort/12.png"/>
+</td>
+</table>
+
+
+
 
 ## Tech-stack
 
@@ -34,30 +62,7 @@
 * CI/CD
     * Github Actions
     
-<table>
-<tr>
-<td>
-<img  width="200" height="400" src="./screenshort/5.png"/>
-</td>
-<td>
-<img  width="200" height="400" src="./screenshort/1.png"/>
-</td>
-<td>
-<img  width="200" height="400" src="./screenshort/3.png"/>
-</td>
-</tr>
 
-<tr>
-<td>
-<img  width="200" height="400" src="./screenshort/3.png"/>
-</td>
-<td>
-<img  width="200" height="400" src="./screenshort/4.png"/>
-</td>
-<td>
-<img  width="200" height="400" src="./screenshort/12.png"/>
-</td>
-</table>
 
 
 
