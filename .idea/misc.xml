@@ -9,7 +9,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11481481481481481" />
         <entry key="app/src/main/res/layout/activity_posts.xml" value="0.12537993920972645" />
         <entry key="app/src/main/res/layout/fragment_post_details.xml" value="0.10190217391304347" />
-        <entry key="app/src/main/res/layout/fragment_posts_list.xml" value="0.12537993920972645" />
+        <entry key="app/src/main/res/layout/fragment_posts_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/post_item_layout.xml" value="0.2277992277992278" />
       </map>
     </option>

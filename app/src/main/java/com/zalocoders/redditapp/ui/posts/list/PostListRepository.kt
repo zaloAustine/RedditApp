@@ -9,6 +9,7 @@ import com.zalocoders.redditapp.data.models.post.Children
 import com.zalocoders.redditapp.data.models.post.FavouritePostEntity
 import com.zalocoders.redditapp.db.FavouritePostsDao
 import com.zalocoders.redditapp.network.ApiService
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
@@ -24,18 +25,6 @@ class PostListRepository @Inject constructor(
 		}.flow
 	 }
 	
-	 @SuppressLint("CheckResult")
-	 fun saveFavouriteToDb(post:FavouritePostEntity): Long {
-	 	return favouritePostsDao.insertFavourite(post)
-	 }
-	
-	fun deleteFavourite(id:Int):Single<Int>{
-		return favouritePostsDao.deletePost(id)
-	}
-	
-	fun deleteAllFavourite():Single<Int>{
-		return favouritePostsDao.deleteAllPosts()
-	}
 }
 
 

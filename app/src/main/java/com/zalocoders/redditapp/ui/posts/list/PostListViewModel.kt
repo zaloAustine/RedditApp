@@ -17,22 +17,4 @@ class PostListViewModel @Inject constructor(
 	
 	fun getTopPosts() = repository.getTopPosts().cachedIn(viewModelScope)
 	
-	private fun insertFavourite(post:FavouritePostEntity){
-		Single.fromCallable { repository.saveFavouriteToDb(post) }
-				.subscribeOn(Schedulers.io())
-				.subscribe()
-	}
-	
-	fun deleteFavourite(id:Int){
-		Single.fromCallable {repository.deleteFavourite(id) }
-				.subscribeOn(Schedulers.io())
-				.subscribe()
-	}
-	
-	fun deleteAllFavourites(){
-		Single.fromCallable {repository.deleteAllFavourite() }
-				.subscribeOn(Schedulers.io())
-				.subscribe()
-		
-	}
 }
