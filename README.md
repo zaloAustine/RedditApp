@@ -34,33 +34,13 @@
 * CI/CD
     * Github Actions
     
-
 <table>
 <tr>
 <td>
-<img  width="800" height="400" src="./screenshort/tests.png"/>
-</td>
-</tr>
-<tr>
-<td>
-<img  width="800" height="400" src="./screenshort/test2.png"/>
-</td>
-</tr>
-
-
-</table>
-
-
-<table>
-<tr>
-<td>
-<img  width="200" height="400" src="./screenshort/8.png"/>
+<img  width="200" height="400" src="./screenshort/1.png"/>
 </td>
 <td>
-<img  width="200" height="400" src="./screenshort/9.png"/>
-</td>
-<td>
-<img  width="200" height="400" src="./screenshort/10.png"/>
+<img  width="200" height="400" src="./screenshort/2.png"/>
 </td>
 </tr>
 
@@ -69,10 +49,7 @@
 <img  width="200" height="400" src="./screenshort/3.png"/>
 </td>
 <td>
-<img  width="200" height="400" src="./screenshort/11.png"/>
-</td>
-<td>
-<img  width="200" height="400" src="./screenshort/12.png"/>
+<img  width="200" height="400" src="./screenshort/4.png"/>
 </td>
 </table>
 
