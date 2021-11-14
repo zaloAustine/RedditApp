@@ -6,8 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Oembed(
     val author_name: String,
-    val description: String,
-    val height: Int,
     val html: String,
     val provider_name: String,
     val provider_url: String,

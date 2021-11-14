@@ -7,7 +7,6 @@ fun Children.toFavouritePostEntity():FavouritePostEntity{
 	author = this.child_data.author,
 	author_full_name = this.child_data.author_fullname,
 	downs = this.child_data.downs,
-	edited = this.child_data.edited,
 	is_video = this.child_data.is_video,
 	likes = this.child_data.likes,
 	name = this.child_data.name,
@@ -15,7 +14,6 @@ fun Children.toFavouritePostEntity():FavouritePostEntity{
 	over_18 = this.child_data.over_18,
 	saved = this.child_data.saved,
 	score = this.child_data.score,
-	post_hint = this.child_data.post_hint,
 	thumbnail = this.child_data.thumbnail,
 	url = this.child_data.url,
 	media_url = getMediaUrl(this.child_data.media,this.child_data.is_video,this),
@@ -23,7 +21,6 @@ fun Children.toFavouritePostEntity():FavouritePostEntity{
 	favourite_id = this.child_data.id,
 	ups = this.child_data.ups.toString(),
 	title = this.child_data.title
-	
 	)
 	}
 

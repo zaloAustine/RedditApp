@@ -13,7 +13,6 @@ data class ChildrenData(
 		val author_flair_type: String,
 		val author_fullname: String,
 		val downs: Int,
-		val edited: Boolean,
 		val hide_score: Boolean,
 		val id: String,
 		val title:String,
@@ -25,10 +24,7 @@ data class ChildrenData(
 		val over_18: Boolean,
 		val saved: Boolean,
 		val score: Int,
-		val post_hint:String,
 		val thumbnail: String,
-		val thumbnail_height: Int,
-		val thumbnail_width: Int,
 		val ups: Int,
 		val upvote_ratio: Double,
 		@Json(name = "url_overridden_by_dest")
