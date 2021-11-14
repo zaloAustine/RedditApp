@@ -5,7 +5,6 @@ plugins {
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs'
-    id 'io.gitlab.arturbosch.detekt'
 }
 
 android {
@@ -63,8 +62,8 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-
+    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
+    
     //room database
     implementation("androidx.room:room-ktx:2.3.0")
     implementation("androidx.room:room-runtime:2.3.0")
@@ -74,6 +73,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
+
 
     //timber
     implementation("com.jakewharton.timber:timber:5.0.1")
@@ -94,26 +94,11 @@ dependencies {
     //video player
     implementation "com.google.android.exoplayer:exoplayer:$exoPlayerVersion"
 
-
     //glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     //favourite
     implementation 'com.github.ivbaranov:materialfavoritebutton:0.1.5'
-}
 
-detekt {
-    buildUponDefaultConfig = true
-    allRules = false
-    autoCorrect = true
-    config = files("${project.rootDir}/detekt.yml")
-    baseline = file("${project.rootDir}/detekt-baseline.xml")
-
-    reports {
-        html.enabled = true
-        xml.enabled = true
-        txt.enabled = true
-        sarif.enabled = true
-    }
 }

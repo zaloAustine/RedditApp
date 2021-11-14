@@ -1,11 +1,14 @@
 package com.zalocoders.redditapp.ui.posts.list
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -43,6 +46,8 @@ class PostsListFragment : Fragment(),OnClickListener{
 		setUpViews()
 		getPost()
 		setUpLoading()
+		searchCloseListener()
+		setUpSearch()
 	}
 	
 	private fun setUpViews(){
@@ -51,6 +56,7 @@ class PostsListFragment : Fragment(),OnClickListener{
 			findNavController().navigate(action)
 		}
 	}
+	
 	private fun observeViewModel(){
 		viewModel.isSaved.observe(viewLifecycleOwner,{
 			when(it){
@@ -90,6 +96,14 @@ class PostsListFragment : Fragment(),OnClickListener{
 		}
 	}
 	
+	private fun setUpSearchData(query:String){
+		lifecycleScope.launchWhenStarted{
+			viewModel.getSearchedItems(query).collectLatest {
+				postAdapter.submitData(it)
+			}
+		}
+	}
+	
 	private fun setUpLoading(){
 		postAdapter.addLoadStateListener { loadState ->
 		
@@ -110,6 +124,38 @@ class PostsListFragment : Fragment(),OnClickListener{
 				}
 			}
 		}
+	}
+	
+	private fun setUpSearch() {
+		
+		binding.multiSearchView.isIconified = true
+		
+		binding.multiSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+			
+			override fun onQueryTextChange(newText: String): Boolean {
+				return false
+			}
+			
+			override fun onQueryTextSubmit(query: String): Boolean {
+				setUpSearchData(query)
+				closeKeyBoard()
+				return true
+			}
+		})
+	}
+	
+	private fun searchCloseListener() {
+		binding.multiSearchView.setOnCloseListener {
+			closeKeyBoard()
+			getPost()
+			true
+		}
+	}
+	
+	private fun closeKeyBoard() {
+		val imm =
+				activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+		imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
 	}
 	
 	override fun addFavourite(item: Children) {

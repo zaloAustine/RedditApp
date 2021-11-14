@@ -25,7 +25,13 @@ class PostListRepository @Inject constructor(
 			PostPagingSource(apiService)
 		}.flow
 	 }
-
+	
+	fun getSearchedItems(query: String):Flow<PagingData<Children>> {
+			return Pager(PagingConfig(pageSize = 25)) {
+				SearchDataSource(apiService,query)
+			}.flow
+	}
+	
 	@SuppressLint("CheckResult")
 	fun saveFavouriteToDb(post:FavouritePostEntity): Completable {
 		return favouritePostsDao.insertFavourite(post)
@@ -40,7 +46,6 @@ class PostListRepository @Inject constructor(
 	}
 }
 
-
 class PostPagingSource(
 		private val apiService: ApiService
 ) : PagingSource<Int, Children>() {
@@ -49,6 +54,28 @@ class PostPagingSource(
 		return try {
 			val nextPage = params.key ?: 1
 			val response = apiService.getTopPosts("all",nextPage.toString(),"poo")
+			
+			LoadResult.Page(
+					data = response.data.children,
+					prevKey = if (nextPage == 1) null else nextPage - 1,
+					nextKey = response.data.dist + 1
+			)
+		} catch (e: Exception) {
+			LoadResult.Error(e)
+		}
+	}
+}
+
+
+class SearchDataSource(
+		private val apiService: ApiService,
+		private val query:String
+) : PagingSource<Int, Children>() {
+	
+	override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Children> {
+		return try {
+			val nextPage = params.key ?: 1
+			val response = apiService.searchPosts(query,"all",nextPage.toString())
 			
 			LoadResult.Page(
 					data = response.data.children,

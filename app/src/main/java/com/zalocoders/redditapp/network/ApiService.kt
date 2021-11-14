@@ -7,7 +7,7 @@ import retrofit2.http.Query
 interface ApiService {
 	
 	@GET("top.json")
-	 suspend fun getTopPosts(
+	suspend fun getTopPosts(
 			@Query("t") t: String,
 			@Query("limit") limit: String,
 			@Query("after") after: String,
@@ -15,9 +15,9 @@ interface ApiService {
 	
 	
 	@GET("search.json")
-	 fun searchPosts(
+	suspend fun searchPosts(
 			@Query("q") query: String,
-			@Query("t") t: String,
+			@Query("after") t: String,
 			@Query("limit") limit: String,
 	): PostsResponse
 }

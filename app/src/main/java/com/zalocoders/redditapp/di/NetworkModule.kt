@@ -1,5 +1,6 @@
 package com.zalocoders.redditapp.di
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.zalocoders.redditapp.network.ApiService
@@ -14,7 +15,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -55,6 +55,7 @@ object NetworkModule {
 			.baseUrl(BASE_URL)
 			.client(okHttpClient)
 			.addConverterFactory(MoshiConverterFactory.create(moshi))
+			.addCallAdapterFactory(CoroutineCallAdapterFactory())
 			.build()
 	
 	@Provides

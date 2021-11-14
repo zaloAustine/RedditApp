@@ -30,6 +30,8 @@ class PostListViewModel @Inject constructor(
 	
 	fun getTopPosts() = repository.getTopPosts().cachedIn(viewModelScope)
 	
+	fun getSearchedItems(query: String) = repository.getSearchedItems(query).cachedIn(viewModelScope)
+	
 	fun saveFavouriteToDb(favouritePostEntity: FavouritePostEntity){
 		disposable.add(repository.saveFavouriteToDb(favouritePostEntity)
 				.subscribeOn(Schedulers.io())
