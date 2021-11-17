@@ -60,6 +60,6 @@ class PostListViewModel @Inject constructor(
 	
 	override fun onCleared() {
 		super.onCleared()
-		disposable.clear()
+		disposable.dispose()
 	}
 }

@@ -50,6 +50,6 @@ class PostDetailViewModel @Inject constructor(
 	
 	override fun onCleared() {
 		super.onCleared()
-		disposable.clear()
+		disposable.dispose()
 	}
 }
