@@ -5,7 +5,6 @@ fun Children.toFavouritePostEntity():FavouritePostEntity{
 	return FavouritePostEntity(
 	archived = this.child_data.archived,
 	author = this.child_data.author,
-	author_full_name = this.child_data.author_fullname,
 	downs = this.child_data.downs,
 	is_video = this.child_data.is_video,
 	likes = this.child_data.likes,

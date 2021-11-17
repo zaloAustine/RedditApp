@@ -10,7 +10,6 @@ import kotlinx.parcelize.Parcelize
 data class ChildrenData(
 		val archived: Boolean,
 		val author: String,
-		val author_flair_type: String,
 		val author_fullname: String,
 		val downs: Int,
 		val hide_score: Boolean,

@@ -11,7 +11,6 @@ data class FavouritePostEntity(
 		@PrimaryKey(autoGenerate = false) val favourite_id: String,
 		val archived: Boolean,
 		val author: String,
-		val author_full_name: String,
 		val downs: Int,
 		val is_video: Boolean,
 		val likes: String?,

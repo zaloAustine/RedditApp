@@ -72,6 +72,6 @@ class FavouriteListViewModel @Inject constructor(
 	
 	override fun onCleared() {
 		super.onCleared()
-		disposable.dispose()
+		disposable.clear()
 	}
 }

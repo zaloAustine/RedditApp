@@ -2,10 +2,12 @@ package com.zalocoders.redditapp.ui.posts.list
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.zalocoders.redditapp.data.models.post.Children
 import com.zalocoders.redditapp.data.models.post.FavouritePostEntity
 import com.zalocoders.redditapp.db.FavouritePostsDao
@@ -14,6 +16,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
+import timber.log.Timber
 
 
 class PostListRepository @Inject constructor(
@@ -58,10 +61,22 @@ class PostPagingSource(
 			LoadResult.Page(
 					data = response.data.children,
 					prevKey = if (nextPage == 1) null else nextPage - 1,
-					nextKey = response.data.dist + 1
+					nextKey = nextPage + 2
 			)
 		} catch (e: Exception) {
 			LoadResult.Error(e)
+		}
+	}
+	
+	// The refresh key is used for subsequent refresh calls to PagingSource.load after the initial load
+	@ExperimentalPagingApi
+	override fun getRefreshKey(state: PagingState<Int, Children>): Int? {
+		// We need to get the previous key (or next key if previous is null) of the page
+		// that was closest to the most recently accessed index.
+		// Anchor position is the most recently accessed index
+		return state.anchorPosition?.let { anchorPosition ->
+			state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+					?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
 		}
 	}
 }
@@ -77,10 +92,11 @@ class SearchDataSource(
 			val nextPage = params.key ?: 1
 			val response = apiService.searchPosts(query,"all",nextPage.toString())
 			
+			
 			LoadResult.Page(
 					data = response.data.children,
 					prevKey = if (nextPage == 1) null else nextPage - 1,
-					nextKey = response.data.dist + 1
+					nextKey = nextPage + 2
 			)
 		} catch (e: Exception) {
 			LoadResult.Error(e)
