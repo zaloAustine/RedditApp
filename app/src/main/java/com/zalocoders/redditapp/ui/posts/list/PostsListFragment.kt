@@ -85,7 +85,6 @@ class PostsListFragment : Fragment(),OnClickListener{
 			ids.clear()
 			ids.addAll(item.map { it.favourite_id })
 		})
-		
 	}
 	
 	private fun getPost(){

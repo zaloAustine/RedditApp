@@ -14,7 +14,7 @@ import dagger.hilt.components.SingletonComponent
 object DatabaseModule {
 	
 	@Provides
-	fun provideWeatherDatabase(@ApplicationContext context: Context) =
+	fun provideRedditDatabase(@ApplicationContext context: Context) =
 			Room.databaseBuilder(context, RedditDatabase::class.java, "reddit_db")
 					.fallbackToDestructiveMigration()
 					.build()
